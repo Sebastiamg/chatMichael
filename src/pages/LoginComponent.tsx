@@ -10,7 +10,7 @@ export default function LoginComponent({navigation}: Props) {
       <Text>LoginComponent</Text>
       <Button
         title="home"
-        onPress={() => navigation.navigate('MenuComponent')}
+        onPress={() => navigation.replace('MenuComponent')}
       />
     </View>
   );
