@@ -9,8 +9,14 @@ const Stack = createNativeStackNavigator();
 export default function StackComponent() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginComponent} />
-      <Stack.Screen name="Register" component={RegisterComponent} />
+      <Stack.Screen
+        name={' Ϟ(๑⚈ ․̫ ⚈๑)⋆ ╰┈─➤  Michael Ortiz'}
+        component={LoginComponent}
+      />
+      <Stack.Screen
+        name="(ง ◉ _ ◉)ง  ╰┈─➤   Michael Ortiz"
+        component={RegisterComponent}
+      />
       <Stack.Screen
         name="MenuComponent"
         component={MenuComponent}

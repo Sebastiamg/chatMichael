@@ -4,7 +4,7 @@ import UserPrivateChatComponent from '../components/UserPrivateChatComponent';
 import {Button, View, ScrollView} from 'react-native';
 
 import {UserData} from '../interaces/userData.interface';
-import {socket} from '../../socket/client';
+import socket from '../../socket/client';
 
 import {stylees} from '../themes/styles';
 

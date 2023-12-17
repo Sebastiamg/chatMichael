@@ -4,8 +4,9 @@ import {TouchableOpacity} from 'react-native';
 import {stylees} from '../themes/styles';
 
 import {Verify} from '../services/auth.service';
-import {socket} from '../../socket/client';
+import socket from '../../socket/client';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AlertError, checkInputs} from '../utils/utils';
 
 interface Props extends NativeStackScreenProps<any, any> {}
 export const LoginComponent = ({navigation}: Props) => {
@@ -15,6 +16,7 @@ export const LoginComponent = ({navigation}: Props) => {
   const [ip, setIP] = useState('');
 
   useEffect(() => {
+    socket.connect();
     socket.emit('getIp');
     function getIp(userIP: string) {
       setIP(userIP);
@@ -27,45 +29,66 @@ export const LoginComponent = ({navigation}: Props) => {
   }, []);
 
   async function LoginUser() {
-    await Verify({username, password, ip}).then(res => {
-      console.log('REGISTRADO: ', res.data.message);
-      if (res.data.message) {
-        navigation.navigate('MenuComponent');
-      }
-    });
-    setUsername('');
-    setPassword('');
+    if (!checkInputs(username, password)) {
+      AlertError('Form Error', 'Please fill all inputs');
+      return;
+    }
+
+    await Verify({username, password, ip})
+      .then(res => {
+        if (res.data.message) {
+          navigation.navigate('MenuComponent');
+        }
+
+        // send data to sever
+        socket.emit('user data', {username});
+
+        setUsername('');
+        setPassword('');
+      })
+      .catch(err => {
+        return AlertError('', '', true, err);
+      });
   }
 
   return (
-    <ScrollView>
-      <View style={{padding: 20, alignContent: 'center'}}>
-        <Text>Username:</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{position: 'relative', flex: 1}}>
-            <TextInput
-              style={stylees.chat__input}
-              placeholder="Nombre"
-              onChangeText={text => setUsername(text)}
-              value={username}
-            />
-          </View>
+    <ScrollView contentContainerStyle={stylees.authForm}>
+      <Text style={stylees.authTitle}>LogIn</Text>
+      <View style={stylees.authInputContainer}>
+        <Text style={stylees.text}>Username</Text>
+        <TextInput
+          style={stylees.authInput}
+          placeholderTextColor={'gray'}
+          placeholder="Sebas777"
+          onChangeText={text => setUsername(text)}
+          value={username}
+        />
+      </View>
+
+      <View style={stylees.authInputContainer}>
+        <Text style={stylees.text}>Password</Text>
+        <TextInput
+          style={stylees.authInput}
+          placeholderTextColor={'gray'}
+          placeholder="••••••••••"
+          secureTextEntry
+          onChangeText={text => setPassword(text)}
+          value={password}
+        />
+      </View>
+      <View>
+        <View>
+          <TouchableOpacity style={stylees.authLink} onPress={LoginUser}>
+            <Text style={stylees.textButtons}>LogIn</Text>
+          </TouchableOpacity>
         </View>
-        <Text>Password:</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{position: 'relative', flex: 1}}>
-            <TextInput
-              style={stylees.chat__input}
-              placeholder="Contraseña"
-              secureTextEntry
-              onChangeText={text => setPassword(text)}
-              value={password}
-            />
-          </View>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <TouchableOpacity style={stylees.buttons} onPress={LoginUser}>
-            <Text style={stylees.textButtons}>Register</Text>
+        <View>
+          <TouchableOpacity
+            style={[stylees.authLink, stylees.authLinkA]}
+            onPress={() =>
+              navigation.replace('(ง ◉ _ ◉)ง  ╰┈─➤   Michael Ortiz')
+            }>
+            <Text style={stylees.authText}>Create Account</Text>
           </TouchableOpacity>
         </View>
       </View>

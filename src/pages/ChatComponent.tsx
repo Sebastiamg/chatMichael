@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {socket} from '../../socket/client';
+import socket from '../../socket/client';
 
 import {stylees} from '../themes/styles';
 
@@ -19,7 +19,6 @@ export default function ChatComponent() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
-    // socket.connect();
     function onConnect() {
       setIsConnected(true);
     }

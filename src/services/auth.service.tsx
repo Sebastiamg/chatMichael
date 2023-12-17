@@ -8,12 +8,7 @@ function Verify(user: UserData) {
 }
 
 function Register(user: UserData) {
-  axios
-    .post(BASE_URL.concat('/register'), user)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => console.log(err));
+  return axios.post(BASE_URL.concat('/register'), user);
 }
 
 export {Verify, Register};
