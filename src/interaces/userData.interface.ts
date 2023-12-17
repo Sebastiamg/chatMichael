@@ -1,4 +1,6 @@
 export interface UserData {
-  id: string;
-  ip: 'string';
+  ip: string;
+  username: string;
+  id?: string;
+  password?: string;
 }

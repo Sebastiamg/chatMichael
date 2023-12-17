@@ -19,6 +19,7 @@ export default function ChatComponent() {
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
+    // socket.connect();
     function onConnect() {
       setIsConnected(true);
     }

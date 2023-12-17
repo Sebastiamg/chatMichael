@@ -14,6 +14,7 @@ export default function MenuComponent({navigation}: Props) {
   const [users, setUsers] = useState<UserData[]>([]);
 
   useEffect(() => {
+    socket.connect();
     function concatNewUser(user: UserData) {
       console.log(user);
       setUsers(currentUsers => [...currentUsers, user]);

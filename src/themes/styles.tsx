@@ -94,8 +94,21 @@ export const stylees = StyleSheet.create({
     backgroundColor: '#e5e5e5',
     borderColor: '#bcb8b1',
   },
-  //   text: {
-  //     color: 'black',
-  //     textAlign: 'center',
-  //   },
+  buttons: {
+    fontSize: 20,
+    marginTop: 20,
+    width: 100,
+    height: 40,
+    justifyContent: 'center',
+    textAlign: 'center',
+    borderRadius: 7,
+    borderColor: '#bcb8b1',
+    backgroundColor: '#e5e5e5',
+    borderLeftWidth: 5,
+    borderBottomWidth: 5,
+  },
+  textButtons: {
+    textAlign: 'center',
+    color: 'black',
+  },
 });
