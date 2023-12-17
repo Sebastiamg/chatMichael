@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba chat</title>
+    <!-- <link rel="stylesheet" href="./styles.css" /> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .chat {
+        width: 20%;
+        margin: 0 auto;
+        height: 80vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 7px;
+        padding: 5px;
+        gap: 15px;
+      }
+
+      @media (max-width: 600px) {
+        .chat {
+          width: 90%;
+        }
+      }
+
+      .chat__form {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+      }
+
+      .chat__input {
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: 7px;
+        flex-basis: 65%;
+        font-weight: bold;
+      }
+
+      .chat__input:focus {
+        outline: none;
+      }
+
+      .chat_button {
+        flex-basis: 30%;
+        border-radius: 7px;
+        font-weight: bold;
+        background: rgb(10, 10, 10);
+        transition: 0.2s;
+        color: white;
+        border: 0;
+      }
+
+      .chat_button:hover {
+        background: rgb(24, 24, 24);
+      }
+
+      .chat_button:active {
+        scale: 95%;
+        background: black;
+      }
+
+      .chat_messages {
+        width: 100%;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .chat__text {
+        padding: 4px;
+      }
+      #circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 50px;
+        height: 50px;
+        background: rgb(64, 131, 20);
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -o-transform: translateX(-50%) translateY(-50%);
+      }
+      .room {
+        display: block;
+        border: 2px solid #000;
+        margin-bottom: 20px;
+      }
+    </style>
+    <script type="module">
+      import { io } from 'https://cdn.socket.io/4.7.2/socket.io.esm.min.js';
+      const socket = io();
+
+      const form = document.getElementById('form');
+      const input = document.getElementById('input');
+      const messages = document.querySelector('.chat_messages');
+
+      socket.on('my message', msg => {
+        console.log(msg);
+        const item = document.createElement('li');
+        item.classList.add('chat__text');
+        item.textContent = msg;
+        messages.insertAdjacentElement('beforeend', item);
+      });
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        if (input.value) {
+          socket.emit('my message', input.value);
+          input.value = '';
+        }
+      });
+
+      // pruebas
+      // const salute = document.querySelector('#salute');
+      // salute.addEventListener('click', () => {
+      // socket.emit('last', 'Hola, eres el útimo pe causa');
+      // });
+      // socket.on('last', data => {
+      // console.log(data);
+      // });
+
+      // const circle = document.querySelector('#circle');
+      // function changeCirPos(position) {
+      //   circle.style.top = position.posy;
+      //   circle.style.left = position.posx;
+      // }
+      // function drag(e) {
+      //   const positions = {
+      //     posy: e.clientY + 'px',
+      //     posx: e.clientX + 'px',
+      //   };
+
+      //   changeCirPos(positions)
+      //   socket.emit('circle position', positions);
+      // }
+
+      // socket.on('circle move', positions => {
+      //   changeCirPos(positions)
+      // });
+
+      // document.addEventListener('mousedown', () => {
+      //   document.addEventListener('mousemove', drag);
+      // });
+      // document.addEventListener('mouseup', () => {
+      //   document.removeEventListener('mousemove', drag);
+      // });
+      // const cr1 = document.querySelector('#cr1');
+      // const cr2 = document.querySelector('#cr2');
+      // const cr3 = document.querySelector('#cr3');
+
+      // cr1.addEventListener('click', () => {
+      //   socket.emit('conect to room', '1');
+      // });
+      // cr2.addEventListener('click', () => {
+      //   socket.emit('conect to room', '2');
+      // });
+      // cr3.addEventListener('click', () => {
+      //   socket.emit('conect to room', '3');
+      // });
+
+      // // send message logic
+      // const sendMessage = document.querySelector('#sendxd');
+      // sendMessage.addEventListener('click', () => {
+      //   const msg = prompt('Escribe un mensaje para la sala');
+
+      //   socket.emit('roomMsg', msg);
+      // });
+
+      // socket.on('msg for room', ({ msg, room }) => {
+      //   const li = `<li>${msg}</li>`;
+      //   const ul = document.querySelector(`#room${room}`);
+      //   ul.insertAdjacentHTML('beforeend', li);
+      // });
+
+      // const teachers = ['pro1', 'pro2', 'pro3'];
+
+      // let socketNamespace, group;
+
+      // const chat = document.querySelector('#chat');
+      // const namespace = document.querySelector('#namespace');
+
+      // if (teachers.includes(user)) {
+      //   socketNamespace = io('/teachers');
+      //   group = 'Teachers';
+      // } else {
+      //   socketNamespace = io('/students');
+      //   group = 'Students';
+      // }
+
+      // socketNamespace.on('connect', () => {
+      //   namespace.textContent = group;
+      // });
+    </script>
+  </head>
+  <body>
+    <main class="chat">
+      <ul class="chat_messages"></ul>
+      <form class="chat__form" id="form">
+        <input
+          type="text"
+          name="message"
+          id="input"
+          class="chat__input"
+          placeholder="type a message" />
+        <button type="submit" class="chat_button">Send</button>
+      </form>
+    </main>
+  </body>
+</html>
