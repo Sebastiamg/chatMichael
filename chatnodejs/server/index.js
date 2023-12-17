@@ -1,20 +1,33 @@
-import express from "express";
-import bodyParser from "body-parser";
-import logger from 'morgan'
-import { createServer } from 'node:http'
-import { Server } from 'socket.io'
+import express from 'express';
+import bodyParser from 'body-parser';
+import logger from 'morgan';
+import { createServer } from 'node:http';
+import { Server } from 'socket.io';
+
+import https from 'https'
+import fs from 'fs'
+import path from 'path'
+const privateKeyPath = path.join(process.cwd(), 'private-key.pem');
+const certificatePath = path.join(process.cwd(), 'certificate.pem');
+
+const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+const certificate = fs.readFileSync(certificatePath, 'utf8');
+
+const credentials = { key: privateKey, cert: certificate };
+
 
 const port = process.env.SERVER_PORT ?? 8000;
 
 const app = express()
 // creamos el servidor http
 const server = createServer(app)
+// const server = https.createServer(credentials ,app)
 const io = new Server(server, {
     connectionStateRecovery: {
         maxDisconnectionDuration: {}
     },
     cors: {
-        origin: "*"
+        origin: '*'
     },
 })
 
@@ -31,7 +44,7 @@ io.on('connection', (socket) => {
 
     socket.data = userCredentials
 
-    const currentRoom = "";
+    const currentRoom = '';
     // ----------
 
     console.log(`User ${socket.data.ip} has connected`)
@@ -47,7 +60,7 @@ io.on('connection', (socket) => {
     socket.on('user data', ({ username }) => {
         socket.data = {
             ...socket.data,
-            username
+            username: username ?? socket.handshake.username
         }
     })
 
@@ -56,7 +69,12 @@ io.on('connection', (socket) => {
 
     // on cliente disconect
     socket.on('disconnect', () => {
-        console.log(`User ${socket.id} disconnected`)
+        console.log(`User ${userCredentials.ip} disconnected`)
+    })
+
+    // log log
+    socket.on('log data', () => {
+        console.log('my cliente data: ', socket.data, socket.handshake.auth)
     })
 
     // ------------------- messages
@@ -69,7 +87,7 @@ io.on('connection', (socket) => {
 
     // ver eventos
     socket.onAny((event, ...args) => {
-        console.log("Event: ", event, args);
+        console.log('Event: ', event, args);
     });
 
 })
@@ -104,7 +122,7 @@ app.post('/verify', async (req, res, next) => {
 
         return res.status(200).json({ message: true });
     } else {
-        console.log("not found", user)
+        console.log('not found', user)
         return res.status(404).json({ error: 'User not foun in DB' });
     }
 })
@@ -126,7 +144,7 @@ app.post('/register', async (req, res) => {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
     })).json().then(res => {
         delete user.password

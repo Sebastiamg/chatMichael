@@ -14,7 +14,6 @@ export default function MenuComponent({navigation}: Props) {
   const [users, setUsers] = useState<UserData[]>([]);
 
   useEffect(() => {
-    socket.connect();
     function concatNewUser(user: UserData) {
       console.log(user);
       setUsers(currentUsers => [...currentUsers, user]);
@@ -41,7 +40,6 @@ export default function MenuComponent({navigation}: Props) {
           title="ON/OFF"
           color={'#46494c'}
           onPress={() => {
-            console.log(socket.disconnected, socket.connected);
             if (!socket.disconnected) {
               return socket.disconnect();
             }
