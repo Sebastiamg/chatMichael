@@ -35,12 +35,12 @@ io.on('connection', (socket) => {
     // ----------
 
     console.log(`User ${socket.data.ip} has connected`)
-    console.log(`Connected clientes: ${io.engine.clientsCount}`)
+    // console.log(`Connected clientes: ${io.engine.clientsCount}`)
 
 
     // get ip
     socket.on('getIp', () => {
-        console.log(socket.data)
+        // console.log('auth: ', socket.handshake.auth)
         io.emit('socketIP', socket.data.ip)
     })
 
@@ -66,6 +66,11 @@ io.on('connection', (socket) => {
     })
 
 
+
+    // ver eventos
+    socket.onAny((event, ...args) => {
+        console.log("Event: ", event, args);
+    });
 
 })
 

@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native';
 import {stylees} from '../themes/styles';
 
 import {Register} from '../services/auth.service';
-import {socket} from '../../socket/client';
+import socket from '../../socket/client';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AlertError, checkInputs} from '../utils/utils';
 
@@ -14,24 +14,12 @@ export const RegisterComponent = ({navigation}: Props) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const [ip, setIP] = useState('');
-
   useEffect(() => {
-    socket.connect();
-    socket.emit('getIp');
-    function getIp(userIP: string) {
-      setIP(userIP);
-    }
-
-    socket.on('socketIP', getIp);
-    return () => {
-      socket.off('socketIP', getIp);
-      socket.disconnect();
-    };
+    socket.disconnect();
   }, []);
 
   function RegisterUser() {
-    if (!checkInputs(username, password, passwordConfirm, ip)) {
+    if (!checkInputs(username, password, passwordConfirm)) {
       AlertError('Form Error', 'Please fill all inputs');
       return;
     }
@@ -40,16 +28,23 @@ export const RegisterComponent = ({navigation}: Props) => {
       return;
     }
 
-    Register({username, password, ip})
-      .then(() => {
-        setUsername('');
-        setPassword('');
-        setPasswordConfirm('');
-        navigation.replace(' Ϟ(๑⚈ ․̫ ⚈๑)⋆ ╰┈─➤  Michael Ortiz');
-      })
-      .catch(err => {
-        AlertError('', '', true, err);
-      });
+    socket.auth = {username};
+    socket.connect();
+    socket.emit('getIp');
+    socket.on('socketIP', getIp);
+    function getIp(userIP: string) {
+      Register({username, password, ip: userIP})
+        .then(() => {
+          setUsername('');
+          setPassword('');
+          setPasswordConfirm('');
+          navigation.replace(' Ϟ(๑⚈ ․̫ ⚈๑)⋆ ╰┈─➤  Michael Ortiz');
+          socket.off('socketIP', getIp);
+        })
+        .catch(err => {
+          AlertError('', '', true, err);
+        });
+    }
   }
 
   return (

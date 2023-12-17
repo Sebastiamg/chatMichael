@@ -24,7 +24,6 @@ export const LoginComponent = ({navigation}: Props) => {
     socket.on('socketIP', getIp);
     return () => {
       socket.off('socketIP', getIp);
-      socket.disconnect();
     };
   }, []);
 
@@ -34,8 +33,12 @@ export const LoginComponent = ({navigation}: Props) => {
       return;
     }
 
+    socket.emit('getIp');
+
     await Verify({username, password, ip})
       .then(res => {
+        socket.auth = {username};
+        socket.connect();
         if (res.data.message) {
           navigation.navigate('MenuComponent');
         }
