@@ -35,6 +35,7 @@ const io = new Server(server, {
 // const users = [{ id: 1, ip: '::ffff:192.168.3.2', username: 'admin', password: 'admin' }];
 
 // ----------------------- SOCKET
+let conectedUsers = [];
 io.on('connection', (socket) => {
     // ----------
     const userCredentials = {
@@ -62,10 +63,14 @@ io.on('connection', (socket) => {
             ...socket.data,
             username: username ?? socket.handshake.username
         }
+        conectedUsers.push(socket.data)
     })
 
     // emmit when new user is conected
-    socket.broadcast.emit('newUser', socket.data)
+    socket.broadcast.emit('newUser', socket.data, conectedUsers)
+
+    conectedUsers.push(socket.data)
+    io.emit('newUser2', conectedUsers)
 
     // on cliente disconect
     socket.on('disconnect', () => {

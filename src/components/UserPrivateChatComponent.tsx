@@ -15,7 +15,8 @@ export default function UserPrivateChatComponent({user}: Props) {
   }
   return (
     <TouchableOpacity style={stylees.user} onPress={someAny}>
-      <Text style={stylees.text}>{user.ip}</Text>
+      {/* <Text style={stylees.text}>{user.ip}</Text> */}
+      <Text style={stylees.text}>{user.username ?? user.id}</Text>
     </TouchableOpacity>
   );
 }

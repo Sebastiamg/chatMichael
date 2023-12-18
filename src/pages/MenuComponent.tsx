@@ -28,10 +28,26 @@ export default function MenuComponent({navigation}: Props) {
       });
     }
 
+    function concatNewUser2(user: UserData[]) {
+      console.log('from new User: ', user);
+
+      setUsers(currentUsers => {
+        const allUsers = [...currentUsers, ...user];
+        const newUsers = allUsers.filter(
+          (obj, idx, self) =>
+            idx === self.findIndex(o => o.ip === obj.ip && o.ip === obj.ip),
+        );
+
+        return newUsers;
+      });
+    }
+
     socket.on('newUser', concatNewUser);
+    // socket.on('newUser2', concatNewUser2);
 
     return () => {
       socket.off('newUser', concatNewUser);
+      // socket.off('newUser2', concatNewUser2);
     };
   }, [users]);
 
