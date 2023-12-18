@@ -37,6 +37,7 @@ export const LoginComponent = ({navigation}: Props) => {
 
     await Verify({username, password, ip})
       .then(res => {
+        socket.disconnect();
         socket.auth = {username};
         socket.connect();
         if (res.data.message) {

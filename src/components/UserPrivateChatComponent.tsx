@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {UserData} from '../interaces/userData.interface';
 
 import {stylees} from '../themes/styles';
@@ -10,9 +10,12 @@ interface Props {
 }
 
 export default function UserPrivateChatComponent({user}: Props) {
+  function someAny() {
+    console.log(user);
+  }
   return (
-    <View style={stylees.user}>
+    <TouchableOpacity style={stylees.user} onPress={someAny}>
       <Text style={stylees.text}>{user.ip}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }

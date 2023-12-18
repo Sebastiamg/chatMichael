@@ -67,6 +67,7 @@ export const stylees = StyleSheet.create({
   },
 
   chat__text: {
+    flexDirection: 'column',
     padding: 10,
     marginVertical: 4,
     width: '50%',
@@ -156,5 +157,9 @@ export const stylees = StyleSheet.create({
     fontSize: 40,
     fontWeight: '900',
     textAlign: 'center',
+  },
+  text3: {
+    color: 'violet',
+    fontSize: 10,
   },
 });

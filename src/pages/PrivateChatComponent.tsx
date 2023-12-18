@@ -12,7 +12,7 @@ import socket from '../../socket/client';
 import {stylees} from '../themes/styles';
 import {useFocusEffect} from '@react-navigation/native';
 
-export default function ChatComponent() {
+export default function PrivateChatComponent() {
   const [_, setIsConnected] = useState(socket.connected);
   const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState<

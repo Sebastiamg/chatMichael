@@ -15,8 +15,17 @@ export default function MenuComponent({navigation}: Props) {
 
   useEffect(() => {
     function concatNewUser(user: UserData) {
-      console.log(user);
-      setUsers(currentUsers => [...currentUsers, user]);
+      console.log('from new User: ', user);
+
+      setUsers(currentUsers => {
+        const allUsers = [...currentUsers, user];
+        const newUsers = allUsers.filter(
+          (obj, idx, self) =>
+            idx === self.findIndex(o => o.ip === obj.ip && o.ip === obj.ip),
+        );
+
+        return newUsers;
+      });
     }
 
     socket.on('newUser', concatNewUser);
@@ -40,10 +49,15 @@ export default function MenuComponent({navigation}: Props) {
           title="ON/OFF"
           color={'#46494c'}
           onPress={() => {
-            if (!socket.disconnected) {
-              return socket.disconnect();
-            }
             socket.connect();
+            // socket.emit('log data');
+          }}
+        />
+        <Button
+          title="Delete"
+          color={'#46494c'}
+          onPress={() => {
+            setUsers([]);
           }}
         />
       </View>

@@ -65,11 +65,27 @@ io.on('connection', (socket) => {
     })
 
     // emmit when new user is conected
-    io.emit('newUser', socket.data)
+    socket.broadcast.emit('newUser', socket.data)
 
     // on cliente disconect
     socket.on('disconnect', () => {
         console.log(`User ${userCredentials.ip} disconnected`)
+    })
+
+    // enter some rooms
+    socket.on('move to room', room => {
+        socket.leave(currentRoom)
+        socket.currentRoom = room
+        socket.join(room)
+    })
+
+    socket.on('message to room', data => {
+        io.to(data.room).emit('my message', { ...socket.data, message: data.message, username: socket.handshake.auth.username })
+    })
+
+    socket.on('leave to room', room => {
+        socket.currentRoom = ''
+        socket.leave(room)
     })
 
     // log log
