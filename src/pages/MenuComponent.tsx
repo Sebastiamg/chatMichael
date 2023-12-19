@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import UserPrivateChatComponent from '../components/UserPrivateChatComponent';
-import {Button, View, ScrollView} from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity} from 'react-native';
 
 import {UserData} from '../interaces/userData.interface';
 import socket from '../../socket/client';
@@ -15,8 +15,6 @@ export default function MenuComponent({navigation}: Props) {
 
   useEffect(() => {
     function concatNewUser(user: UserData) {
-      console.log('from new User: ', user);
-
       setUsers(currentUsers => {
         const allUsers = [...currentUsers, user];
         const newUsers = allUsers.filter(
@@ -53,30 +51,6 @@ export default function MenuComponent({navigation}: Props) {
 
   return (
     <View style={stylees.homeScreen}>
-      <View style={stylees.generalChat}>
-        <Button
-          title="General Chat"
-          color={'#46494c'}
-          onPress={() => {
-            navigation.navigate('Chat');
-          }}
-        />
-        <Button
-          title="ON/OFF"
-          color={'#46494c'}
-          onPress={() => {
-            socket.connect();
-            // socket.emit('log data');
-          }}
-        />
-        <Button
-          title="Delete"
-          color={'#46494c'}
-          onPress={() => {
-            setUsers([]);
-          }}
-        />
-      </View>
       <ScrollView contentContainerStyle={stylees.usersList}>
         {users &&
           users.map(user => (
@@ -86,6 +60,13 @@ export default function MenuComponent({navigation}: Props) {
             />
           ))}
       </ScrollView>
+      <TouchableOpacity
+        style={[stylees.buttons, stylees.generalChat]}
+        onPress={() => {
+          navigation.navigate('Chat');
+        }}>
+        <Text style={stylees.textButtons}>General Chat</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -14,7 +14,10 @@ export const RegisterComponent = ({navigation}: Props) => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
+  const [badIp, setBadIp] = useState(false);
+
   useEffect(() => {
+    setBadIp(false);
     socket.disconnect();
   }, []);
 
@@ -42,9 +45,17 @@ export const RegisterComponent = ({navigation}: Props) => {
           socket.off('socketIP', getIp);
         })
         .catch(err => {
+          setUsername('');
+          setPassword('');
+          setPasswordConfirm('');
           AlertError('', '', true, err);
+          socket.off('socketIP', getIp);
+          if (!err.response) {
+            setBadIp(true);
+          }
         });
     }
+    return;
   }
 
   return (
@@ -98,6 +109,17 @@ export const RegisterComponent = ({navigation}: Props) => {
             <Text style={stylees.authText}>Enter with your account</Text>
           </TouchableOpacity>
         </View>
+        {badIp ? (
+          <View>
+            <TouchableOpacity
+              style={[stylees.authLink, stylees.authLinkA, stylees.errorButton]}
+              onPress={() =>
+                navigation.replace('૮₍ ´˶• ᴥ •˶` ₎ა  ╰┈─➤  Michael Ortiz')
+              }>
+              <Text style={stylees.authText}>Set new Server IP</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </View>
     </ScrollView>
   );

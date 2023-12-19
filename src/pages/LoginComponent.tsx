@@ -15,7 +15,10 @@ export const LoginComponent = ({navigation}: Props) => {
 
   const [ip, setIP] = useState('');
 
+  const [badIp, setBadIp] = useState(false);
+
   useEffect(() => {
+    setBadIp(false);
     socket.connect();
     socket.emit('getIp');
     function getIp(userIP: string) {
@@ -46,11 +49,13 @@ export const LoginComponent = ({navigation}: Props) => {
 
         // send data to sever
         socket.emit('user data', {username});
-
         setUsername('');
         setPassword('');
       })
       .catch(err => {
+        if (!err.response) {
+          setBadIp(true);
+        }
         return AlertError('', '', true, err);
       });
   }
@@ -95,6 +100,17 @@ export const LoginComponent = ({navigation}: Props) => {
             <Text style={stylees.authText}>Create Account</Text>
           </TouchableOpacity>
         </View>
+        {badIp ? (
+          <View>
+            <TouchableOpacity
+              style={[stylees.authLink, stylees.authLinkA, stylees.errorButton]}
+              onPress={() =>
+                navigation.replace('૮₍ ´˶• ᴥ •˶` ₎ა  ╰┈─➤  Michael Ortiz')
+              }>
+              <Text style={stylees.authText}>Set new Server IP</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </View>
     </ScrollView>
   );

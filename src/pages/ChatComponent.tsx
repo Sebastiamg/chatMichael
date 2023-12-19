@@ -11,23 +11,44 @@ import socket from '../../socket/client';
 
 import {stylees} from '../themes/styles';
 import {useFocusEffect} from '@react-navigation/native';
+import {GetGeneralChatMsgs} from '../services/auth.service';
+import {checkInputs} from '../utils/utils';
 
 export default function ChatComponent() {
   const [_, setIsConnected] = useState(socket.connected);
   const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState<
-    {key: number; data: string; username: string}[]
+    {key: number; message: string; username: string; ip: string}[]
   >([]);
 
+  const [userIP, setUserIP] = useState();
+
   const scrollViewRef = useRef<ScrollView>(null);
+
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
     }
     socket.on('connect', onConnect);
+    // getUserIp
+    socket.emit('getIp');
+
+    function setIpFromSocket(ipFromSocket: any) {
+      setUserIP(ipFromSocket);
+    }
+
+    socket.on('socketIP', setIpFromSocket);
+
+    // todo
+    GetGeneralChatMsgs()
+      .then(msgs => {
+        setMessages(msgs.data.messages);
+      })
+      .catch(err => console.log(err));
 
     return () => {
       socket.off('connect', onConnect);
+      socket.off('socketIP', setIpFromSocket);
     };
   }, []);
 
@@ -54,14 +75,18 @@ export default function ChatComponent() {
       ...msgs,
       {
         key: new Date().getTime(),
-        data: socketData.message,
+        message: socketData.message,
         username: socketData.username,
+        ip: socketData.ip,
       },
     ]);
   }
 
   function sendMessage() {
     // socket.emit('my message', msg);
+    if (!checkInputs(msg)) {
+      return;
+    }
     socket.emit('message to room', {room: 'generalChat', message: msg});
     setMsg('');
   }
@@ -69,6 +94,7 @@ export default function ChatComponent() {
   function generateMsg(text: string) {
     setMsg(text);
   }
+
   return (
     // todo
     <View style={stylees.chat}>
@@ -79,11 +105,19 @@ export default function ChatComponent() {
         contentContainerStyle={stylees.chat_messages}>
         {messages &&
           messages.map((item, index) => (
-            <View style={stylees.chat__text} key={index}>
-              <Text style={[stylees.text2, stylees.text3]}>
-                {item.username}
-              </Text>
-              <Text style={stylees.text2}>{item.data}</Text>
+            <View
+              style={
+                userIP === item.ip ? stylees.chat__text2 : stylees.chat__text
+              }
+              key={index}>
+              {userIP === item.ip ? (
+                <Text style={[stylees.text2, stylees.text4]}>Me</Text>
+              ) : (
+                <Text style={[stylees.text2, stylees.text5]}>
+                  {item.username ?? item.ip}
+                </Text>
+              )}
+              <Text style={stylees.text3}>{item.message}</Text>
             </View>
           ))}
       </ScrollView>
@@ -94,7 +128,7 @@ export default function ChatComponent() {
           value={msg}
           id="input"
           style={stylees.chat__input}
-          placeholder="type a message"
+          placeholder="Type a message"
           placeholderTextColor={'gray'}
           onChangeText={txt => generateMsg(txt)}
         />

@@ -4,11 +4,17 @@ import ChatComponent from '../pages/ChatComponent';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RegisterComponent} from '../pages/RegisterComponent';
 import {LoginComponent} from '../pages/LoginComponent';
+import SetServerComponent from '../pages/SetServerComponent';
+
 const Stack = createNativeStackNavigator();
 
 export default function StackComponent() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="૮₍ ´˶• ᴥ •˶` ₎ა  ╰┈─➤  Michael Ortiz"
+        component={SetServerComponent}
+      />
       <Stack.Screen
         name={' Ϟ(๑⚈ ․̫ ⚈๑)⋆ ╰┈─➤  Michael Ortiz'}
         component={LoginComponent}

@@ -2,10 +2,16 @@ import {StyleSheet} from 'react-native';
 
 export const stylees = StyleSheet.create({
   homeScreen: {
-    backgroundColor: '#161a1d',
     minHeight: '100%',
   },
-  generalChat: {},
+  generalChat: {
+    height: '10%',
+    width: '100%',
+    borderRightWidth: 5,
+    paddingHorizontal: 20,
+    alignSelf: 'center',
+    borderColor: 'white',
+  },
   usersList: {
     padding: 10,
     flexDirection: 'row',
@@ -19,7 +25,7 @@ export const stylees = StyleSheet.create({
     flexDirection: 'column',
     gap: 15,
     padding: 10,
-    backgroundColor: '#161a1d',
+    backgroundColor: '#333533',
   },
   mainTitle: {
     fontWeight: 'bold',
@@ -53,7 +59,7 @@ export const stylees = StyleSheet.create({
   chat_messages: {
     minWidth: '100%',
     minHeight: '80%',
-    backgroundColor: '#242423',
+    backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
     flexDirection: 'column',
@@ -74,9 +80,27 @@ export const stylees = StyleSheet.create({
     borderRadius: 15,
     borderBottomLeftRadius: 0,
     borderLeftWidth: 5,
+    borderRightWidth: 0.1,
     borderBottomWidth: 5,
-    backgroundColor: '#444140',
-    borderColor: '#323031',
+    backgroundColor: '#cccccc',
+    borderColor: '#253237',
+  },
+  chat__text2: {
+    flexDirection: 'column',
+    position: 'relative',
+    left: '50%',
+    right: '-50%',
+    padding: 10,
+    marginVertical: 4,
+    width: '50%',
+    borderRadius: 15,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 15,
+    borderLeftWidth: 0.1,
+    borderBottomWidth: 5,
+    borderRightWidth: 5,
+    backgroundColor: '#f2f2f2',
+    borderColor: '#6c757d',
   },
   text: {
     color: 'black',
@@ -111,6 +135,7 @@ export const stylees = StyleSheet.create({
   textButtons: {
     textAlign: 'center',
     color: 'white',
+    fontWeight: 'bold',
   },
   authLink: {
     fontSize: 20,
@@ -153,13 +178,53 @@ export const stylees = StyleSheet.create({
     color: 'black',
   },
   authTitle: {
-    color: 'black',
+    color: '#363636',
+    textShadowRadius: 3,
     fontSize: 40,
     fontWeight: '900',
     textAlign: 'center',
   },
   text3: {
-    color: 'violet',
-    fontSize: 10,
+    color: 'black',
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  text4: {
+    color: 'gray',
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  text5: {
+    color: '#495057',
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  setIpSForm: {
+    width: '100%',
+    maxHeight: '80%',
+    position: 'relative',
+    flex: 1,
+    // justifyContent: 'center',
+    padding: 20,
+  },
+  setIpSForm1: {
+    width: '100%',
+    borderRadius: 7,
+    elevation: 5,
+    padding: 30,
+    borderLeftWidth: 5,
+    borderBottomWidth: 5,
+    backgroundColor: '#d6d6d6',
+    borderColor: '#a9a9a9',
+  },
+  authLinkB: {
+    backgroundColor: '#6c757d',
+    borderColor: '#64686b',
+  },
+  authTitle2: {
+    margin: 40,
+  },
+  errorButton: {
+    backgroundColor: '#c7ccb9',
   },
 });

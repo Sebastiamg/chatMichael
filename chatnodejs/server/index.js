@@ -55,7 +55,7 @@ io.on('connection', (socket) => {
     // get ip
     socket.on('getIp', () => {
         // console.log('auth: ', socket.handshake.auth)
-        io.emit('socketIP', socket.data.ip)
+        socket.emit('socketIP', socket.data.ip)
     })
 
     socket.on('user data', ({ username }) => {
@@ -84,8 +84,23 @@ io.on('connection', (socket) => {
         socket.join(room)
     })
 
-    socket.on('message to room', data => {
-        io.to(data.room).emit('my message', { ...socket.data, message: data.message, username: socket.handshake.auth.username })
+    socket.on('message to room', async data => {
+        const messageData = { ...socket.data, message: data.message, username: socket.handshake.auth.username }
+
+        const messageDataToDb = { message: data.message, username: socket.handshake.auth.username, ip: socket.data.ip }
+
+        io.to(data.room).emit('my message', messageData)
+
+        await fetch('http://localhost:3000/generalChat', {
+            method: 'POST',
+            body: JSON.stringify(messageDataToDb),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(() => {
+            console.log(data.room, 'saved')
+        })
+            .catch(() => console.log(messageData.room, 'error'))
     })
 
     socket.on('leave to room', room => {
@@ -176,6 +191,15 @@ app.post('/register', async (req, res) => {
     res.status(200).json({ message: true });
 })
 
+// GENERAL CHAT
+app.get('/generalChat', async (req, res) => {
+    const response = (await fetch('http://localhost:3000/generalChat')).json()
+
+    response.then(messages => {
+        return res.status(200).json({ messages });
+    }).catch(err => console.log(err))
+
+})
 
 server.listen(port, () => {
     console.log(`El server está corriendo en el puerto ${port}\n`)

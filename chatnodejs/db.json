@@ -5,6 +5,356 @@
       "password": "123",
       "ip": "::ffff:192.168.3.3",
       "id": 1
+    },
+    {
+      "username": "Cris",
+      "password": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 2
+    }
+  ],
+  "generalChat": [
+    {
+      "message": "Hola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 1
+    },
+    {
+      "message": "Ola",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 2
+    },
+    {
+      "message": "Buenas",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 3
+    },
+    {
+      "message": "Lslsls",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 4
+    },
+    {
+      "message": "Lala",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 5
+    },
+    {
+      "message": "Ssd",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 6
+    },
+    {
+      "message": "Erf",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 7
+    },
+    {
+      "message": "Olaa",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 8
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 9
+    },
+    {
+      "message": "Udif",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 10
+    },
+    {
+      "message": "Negfro",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 11
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.7",
+      "id": 12
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 13
+    },
+    {
+      "message": "Mee",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 14
+    },
+    {
+      "message": "D",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 15
+    },
+    {
+      "message": "Sdbss",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 16
+    },
+    {
+      "message": "Jiji",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 17
+    },
+    {
+      "message": "Jdjjd",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 18
+    },
+    {
+      "message": "Jajajs",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 19
+    },
+    {
+      "message": "Jsjsjjsjss",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 20
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 21
+    },
+    {
+      "message": "Negro",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 22
+    },
+    {
+      "message": "Loco",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 23
+    },
+    {
+      "message": "Eveh",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 24
+    },
+    {
+      "message": "7g7ggu",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 25
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 26
+    },
+    {
+      "message": "Jsjd",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 27
+    },
+    {
+      "message": "Jajaja",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 28
+    },
+    {
+      "message": "Hshe",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 29
+    },
+    {
+      "message": "Ywyw",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 30
+    },
+    {
+      "message": "Hdjjf",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 31
+    },
+    {
+      "message": "Eh",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 32
+    },
+    {
+      "message": "Vuc6g",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 33
+    },
+    {
+      "message": "H77g",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 34
+    },
+    {
+      "message": "Ola",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 35
+    },
+    {
+      "message": "Como",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 36
+    },
+    {
+      "message": "Estas",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 37
+    },
+    {
+      "message": "B8en",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 38
+    },
+    {
+      "message": "Gracias",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 39
+    },
+    {
+      "message": "Y tu",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 40
+    },
+    {
+      "message": "Ola rató ",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 41
+    },
+    {
+      "message": "Hola",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 42
+    },
+    {
+      "message": "Meee",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 43
+    },
+    {
+      "message": "Skjdjfjf",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 44
+    },
+    {
+      "message": "Sjsjsj",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 45
+    },
+    {
+      "message": "୧⁠(⁠＾⁠ ⁠〰⁠ ⁠＾⁠)⁠୨",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 46
+    },
+    {
+      "message": ":0",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 47
+    },
+    {
+      "message": "└⁠|⁠∵⁠|⁠┐⁠♪",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 48
+    },
+    {
+      "message": "Como haces esas caraa",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 49
+    },
+    {
+      "message": "ヾ⁠(⁠ ͝⁠°⁠ ͜⁠ʖ͡⁠°⁠)⁠ノ⁠♪",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 50
+    },
+    {
+      "message": "Mi teclado tiene",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 51
+    },
+    {
+      "message": "Dice mami que vengas a comer",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 52
+    },
+    {
+      "message": "(⁠ﾉ⁠≧⁠∇⁠≦⁠)⁠ﾉ⁠ ⁠ﾐ⁠ ⁠┻⁠━⁠┻",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 53
+    },
+    {
+      "message": "😊",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 54
+    },
+    {
+      "message": "🇦🇱🇦🇮🇦🇷🇧🇫🇧🇧🇧🇿",
+      "username": "Sebas",
+      "ip": "::ffff:192.168.3.3",
+      "id": 55
+    },
+    {
+      "message": "(⁠╯⁠ರ⁠ ⁠~⁠ ⁠ರ⁠)⁠╯⁠︵⁠ ⁠┻⁠━⁠┻",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 56
+    },
+    {
+      "message": "(⁠╯⁠°⁠□⁠°⁠）⁠╯⁠︵⁠ ⁠┻⁠━⁠┻",
+      "username": "Cris",
+      "ip": "::ffff:192.168.3.7",
+      "id": 57
     }
   ]
 }

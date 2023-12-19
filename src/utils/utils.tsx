@@ -16,9 +16,22 @@ export function AlertError(
   isError = false,
   error?: any,
 ) {
+  if (isError && !error.response) {
+    return Alert.alert(
+      'Error Connection',
+      'Imposible to connect to the Server, check IP 😹',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+    );
+  }
+
   return Alert.alert(
     isError ? `Error ${error.response.status}` : title,
-    isError ? error.response.data.error : body,
+    isError ? error.response.data.error.concat(' 😵') : body.concat(' 😫'),
     [
       {
         style: 'cancel',
